@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, TextInput, View, StyleSheet, Modal } from "react-native";
+import {
+  Button,
+  TextInput,
+  View,
+  StyleSheet,
+  Modal,
+  Image,
+} from "react-native";
 const GoalInput = ({ onAddGoal, showModal, onCancel }) => {
   const [enteredText, setEnteredText] = useState("");
   const goalInputHandler = (text) => {
@@ -13,6 +20,10 @@ const GoalInput = ({ onAddGoal, showModal, onCancel }) => {
   return (
     <Modal visible={showModal} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image
+          source={require("../assets/images/goal.png")}
+          style={styles.imageContainer}
+        />
         <TextInput
           style={styles.textInput}
           placeholder="Your course goal!"
@@ -21,10 +32,10 @@ const GoalInput = ({ onAddGoal, showModal, onCancel }) => {
         />
         <View style={styles.buttonContainer}>
           <View style={styles.buttonStyle}>
-            <Button title="Add Goal" onPress={addGoalHandler} />
+            <Button title="Add Goal" onPress={addGoalHandler} color="#b180f0" />
           </View>
           <View style={styles.buttonStyle}>
-            <Button title="Cancel" onPress={onCancel} />
+            <Button title="Cancel" onPress={onCancel} color="#f31272" />
           </View>
         </View>
       </View>
@@ -39,17 +50,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    backgroundColor: "#311b6b",
     padding: 16,
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#ccc",
     width: "100%",
     padding: 8,
-    borderRadius: 8,
+    borderRadius: 6,
+    color: "#120438",
+    backgroundColor: "#e4d0ff",
+    borderColor: "#e4d0ff",
   },
   buttonContainer: {
     flexDirection: "row",
@@ -59,4 +70,5 @@ const styles = StyleSheet.create({
     width: 100,
     marginHorizontal: 8,
   },
+  imageContainer: {},
 });

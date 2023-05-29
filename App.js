@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [goalList, setGoalList] = useState([]);
@@ -38,34 +39,37 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title="Add New Goal"
-        color="#5e0acc"
-        onPress={addGoalInputHandler}
-      />
-      <GoalInput
-        onAddGoal={addGoalHandler}
-        showModal={showModal}
-        onCancel={endGoalInputHandler}
-      />
-      <View style={styles.goalContainer}>
-        <FlatList
-          data={goalList}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
-          renderItem={(item) => (
-            <GoalItem
-              text={item?.item?.text}
-              onDeleteItem={deleteGoalHandler}
-              id={item?.item?.id}
-            />
-          )}
-          alwaysBounceVertical={false}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add New Goal"
+          color="#a065ec"
+          onPress={addGoalInputHandler}
         />
+        <GoalInput
+          onAddGoal={addGoalHandler}
+          showModal={showModal}
+          onCancel={endGoalInputHandler}
+        />
+        <View style={styles.goalContainer}>
+          <FlatList
+            data={goalList}
+            keyExtractor={(item) => {
+              return item.id;
+            }}
+            renderItem={(item) => (
+              <GoalItem
+                text={item?.item?.text}
+                onDeleteItem={deleteGoalHandler}
+                id={item?.item?.id}
+              />
+            )}
+            alwaysBounceVertical={false}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -75,23 +79,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
   },
-  inputContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
-    borderRadius: 8,
-  },
   goalContainer: {
     flex: 5,
   },
@@ -100,8 +87,5 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 6,
     backgroundColor: "#5e0acc",
-  },
-  goalItem: {
-    color: "white",
   },
 });
